@@ -17,7 +17,12 @@
     }
   ],
   "keywords": [
-    "bedrock", "composer", "roots", "wordpress", "wp", "wp-config"
+    "bedrock",
+    "composer",
+    "roots",
+    "wordpress",
+    "wp",
+    "wp-config"
   ],
   "support": {
     "issues": "https://github.com/roots/bedrock/issues",
@@ -28,14 +33,27 @@
     "preferred-install": "dist",
     "allow-plugins": {
       "composer/installers": true,
-      "roots/wordpress-core-installer": true
+      "roots/wordpress-core-installer": true,
+      "koodimonni/composer-dropin-installer": true
     }
   },
   "repositories": [
     {
       "type": "composer",
       "url": "https://wpackagist.org",
-      "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
+    },
+    {
+      "type": "composer",
+      "url": "https://wp-languages.github.io",
+      "only": [
+        "koodimonni-language/*",
+        "koodimonni-plugin-language/*",
+        "koodimonni-theme-language/*"
+      ]
     }
   ],
   "require": {
@@ -51,7 +69,8 @@
     "wpackagist-theme/twentytwentyfour": "^1.0",
     "humanmade/s3-uploads": "^3.0",
     "ext-imagick": "*",
-    "ext-simplexml": "*"
+    "ext-simplexml": "*",
+    "koodimonni-language/fr_fr": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
@@ -62,16 +81,31 @@
   "extra": {
     "installer-paths": {
       "web/app/mu-plugins/{$name}/": [
-          "type:wordpress-muplugin",
-          "roots/bedrock-autoloader",
-          "roots/bedrock-disallow-indexing",
-          "humanmade/s3-uploads"
+        "type:wordpress-muplugin",
+        "roots/bedrock-autoloader",
+        "roots/bedrock-disallow-indexing",
+        "humanmade/s3-uploads"
       ],
-      "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
-      "web/app/themes/{$name}/": ["type:wordpress-theme"]
+      "web/app/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "web/app/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
     },
     "wordpress-install-dir": "web/wp",
-    "paas": {}
+    "paas": {},
+    "dropin-paths": {
+      "htdocs/wp-content/languages/": [
+        "vendor:koodimonni-language"
+      ],
+      "htdocs/wp-content/languages/plugins/": [
+        "vendor:koodimonni-plugin-language"
+      ],
+      "htdocs/wp-content/languages/themes/": [
+        "vendor:koodimonni-theme-language"
+      ]
+    }
   },
   "scripts": {
     "test": [
